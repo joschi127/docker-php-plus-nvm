@@ -72,10 +72,8 @@ RUN { \
                 echo 'date.timezone=Europe/Berlin'; \
     } > /usr/local/etc/php/conf.d/php.ini
 
-EXPOSE 10022 10080 10443
-
-ENV PORT 10080
 ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
 ENV APACHE_DOCUMENT_ROOT /app/web
 ENV APP_ROOT /app
 ENV POST_DEPLOYMENT_SCRIPT /app/deploy-post-deployment.sh

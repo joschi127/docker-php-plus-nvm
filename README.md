@@ -16,6 +16,11 @@ Configuration options / environment variables:
   User under which apache will be started.
   
 
+* APACHE_RUN_GROUP (default: www-data)
+
+  Group under which apache will be started.
+
+
 * APACHE_DOCUMENT_ROOT (default: /app/web)
 
   The document root for the apache web server.
