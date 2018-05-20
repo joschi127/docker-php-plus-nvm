@@ -43,6 +43,7 @@ RUN apt-get update \
     && docker-php-ext-enable imagick \
     && docker-php-ext-enable mcrypt
 
+COPY motd /etc/motd
 COPY init_container.sh /bin/
 
 RUN   \
