@@ -2,6 +2,7 @@ FROM php:7.2.1-apache
 MAINTAINER joschi127 <127.joschi@gmail.com>
 
 RUN a2enmod rewrite expires include deflate proxy headers
+RUN a2ensite default-ssl
 
 # install the PHP extensions we need
 RUN apt-get update \
@@ -44,6 +45,8 @@ RUN apt-get update \
     && docker-php-ext-enable mcrypt
 
 COPY motd /etc/motd
+COPY vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY vhost-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 COPY init_container.sh /bin/
 
 RUN   \
