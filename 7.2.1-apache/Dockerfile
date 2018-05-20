@@ -1,7 +1,7 @@
 FROM php:7.2.1-apache
 MAINTAINER joschi127 <127.joschi@gmail.com>
 
-RUN a2enmod rewrite expires include deflate
+RUN a2enmod rewrite expires include deflate proxy headers
 
 # install the PHP extensions we need
 RUN apt-get update \
