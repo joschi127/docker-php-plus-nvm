@@ -80,7 +80,7 @@ ENV POST_DEPLOYMENT_SCRIPT /app/deploy-post-deployment.sh
 ENV PATH ${PATH}:${APP_ROOT}/bin:${APP_ROOT}/scripts:${APP_ROOT}/app
 
 RUN   \
-    echo "cd /app" >> /etc/bash.bashrc
+    echo "cd \$APP_ROOT" >> /etc/bash.bashrc
 
 WORKDIR ${APP_ROOT}
 
