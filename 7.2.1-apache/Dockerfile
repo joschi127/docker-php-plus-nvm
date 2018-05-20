@@ -1,8 +1,6 @@
 FROM php:7.2.1-apache
 MAINTAINER joschi127 <127.joschi@gmail.com>
 
-COPY init_container.sh /bin/
-
 RUN a2enmod rewrite expires include deflate
 
 # install the PHP extensions we need
@@ -46,6 +44,8 @@ RUN apt-get update \
          exif \
     && docker-php-ext-enable imagick \
     && docker-php-ext-enable mcrypt
+
+COPY init_container.sh /bin/
 
 RUN   \
    chmod 777 /var/log \
