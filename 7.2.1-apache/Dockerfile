@@ -48,7 +48,7 @@ RUN apt-get update \
     && docker-php-ext-enable mcrypt
 
 RUN   \
-   && chmod 777 /var/log \
+   chmod 777 /var/log \
    && chmod 777 /var/run \
    && chmod 777 /var/lock \
    && chmod 777 /bin/init_container.sh
