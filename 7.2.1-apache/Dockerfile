@@ -1,7 +1,7 @@
 FROM php:7.2.1-apache
 MAINTAINER joschi127 <127.joschi@gmail.com>
 
-RUN a2enmod rewrite expires include deflate proxy headers
+RUN a2enmod rewrite expires include deflate proxy headers ssl
 RUN a2ensite default-ssl
 
 # install the PHP extensions we need
