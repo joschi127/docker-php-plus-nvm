@@ -21,9 +21,12 @@ Configuration options / environment variables:
   The document root for the apache web server.
 
 
+* APP_ROOT (default: /app)
+
+  The root of the application.
+
+
 * POST_DEPLOYMENT_SCRIPT (default: /app/deploy-post-deployment.sh)
 
   Script that will be executed after deployment / during container
   startup.
-  
-

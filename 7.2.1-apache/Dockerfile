@@ -16,8 +16,6 @@ RUN apt-get update \
          libgmp-dev \
          libmagickwand-dev \
          openssh-server vim curl wget tcptraceroute \
-    && chmod 755 /bin/init_container.sh \
-    && echo "cd /app" >> /etc/bash.bashrc \
     && ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/libldap.so \
     && ln -s /usr/lib/x86_64-linux-gnu/liblber.so /usr/lib/liblber.so \
     && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
@@ -72,13 +70,17 @@ RUN { \
 
 EXPOSE 10022 10080 10443
 
+ENV PORT 10080
 ENV APACHE_RUN_USER www-data
 ENV APACHE_DOCUMENT_ROOT /app/web
+ENV APP_ROOT /app
 ENV POST_DEPLOYMENT_SCRIPT /app/deploy-post-deployment.sh
 
-ENV PORT 10080
-ENV PATH ${PATH}:/home/site/wwwroot
+ENV PATH ${PATH}:${APP_ROOT}/bin:${APP_ROOT}/scripts:${APP_ROOT}/app
 
-WORKDIR /app
+RUN   \
+    echo "cd /app" >> /etc/bash.bashrc
+
+WORKDIR ${APP_ROOT}
 
 ENTRYPOINT ["/bin/init_container.sh"]
