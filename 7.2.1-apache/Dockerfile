@@ -1,10 +1,21 @@
 FROM php:7.2.1-apache
 MAINTAINER joschi127 <127.joschi@gmail.com>
 
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_DOCUMENT_ROOT /app/web
+ENV APP_ROOT /app
+ENV POST_DEPLOYMENT_SCRIPT /app/deploy-post-deployment.sh
+ENV NODE_VERSION=9.11.1
+ENV GULP_VERSION=3.9.1
+ENV JSPM_VERSION=0.16.53
+ENV NVM_DIR=/usr/local/nvm
+
+ENV PATH ${PATH}:${APP_ROOT}/bin:${APP_ROOT}/scripts:${APP_ROOT}/app
+
+# Install extra packages, PHP extensions, ...
 RUN a2enmod rewrite expires include deflate proxy headers ssl
 RUN a2ensite default-ssl
-
-# install the PHP extensions we need
 RUN mkdir -p /usr/share/man/man1/ /usr/share/man/man7/          # fix for postgresql-client install
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -65,11 +76,10 @@ COPY vhost.conf /etc/apache2/sites-available/000-default.conf
 COPY vhost-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 COPY init_container.sh /bin/
 
-RUN   \
-   chmod 777 /var/log \
-   && chmod 777 /var/run \
-   && chmod 777 /var/lock \
-   && chmod 777 /bin/init_container.sh
+RUN chmod 777 /var/log \
+    && chmod 777 /var/run \
+    && chmod 777 /var/lock \
+    && chmod 777 /bin/init_container.sh
 
 RUN { \
             echo 'opcache.memory_consumption=128'; \
@@ -88,16 +98,21 @@ RUN { \
             echo 'date.timezone=Europe/Berlin'; \
     } > /usr/local/etc/php/conf.d/php.ini
 
-ENV APACHE_RUN_USER www-data
-ENV APACHE_RUN_GROUP www-data
-ENV APACHE_DOCUMENT_ROOT /app/web
-ENV APP_ROOT /app
-ENV POST_DEPLOYMENT_SCRIPT /app/deploy-post-deployment.sh
+# Install nodejs / npm via nvm
+RUN mkdir -p $NVM_DIR \
+    && curl https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash \
+    && . $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default \
+    && npm install gulp@$GULP_VERSION -g \
+    && npm install jspm@$JSPM_VERSION -g
 
-ENV PATH ${PATH}:${APP_ROOT}/bin:${APP_ROOT}/scripts:${APP_ROOT}/app
-
-RUN   \
-    echo "cd \$APP_ROOT" >> /etc/bash.bashrc
+# Setup bashrc
+RUN echo >> /etc/bash.bashrc \
+    && echo "cd \$APP_ROOT" >> /etc/bash.bashrc \
+    && echo ". \$NVM_DIR/nvm.sh" >> /etc/bash.bashrc \
+    && echo >> /etc/bash.bashrc
 
 WORKDIR ${APP_ROOT}
 
