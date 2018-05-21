@@ -5,6 +5,7 @@ RUN a2enmod rewrite expires include deflate proxy headers ssl
 RUN a2ensite default-ssl
 
 # install the PHP extensions we need
+RUN mkdir -p /usr/share/man/man1/ /usr/share/man/man7/          # fix for postgresql-client install
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         libpng-dev \
