@@ -1,16 +1,18 @@
 FROM php:7.2.1-apache
 MAINTAINER joschi127 <127.joschi@gmail.com>
 
+# Environment variables that can be changed on runtime
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
 ENV APACHE_DOCUMENT_ROOT /app/web
 ENV APP_ROOT /app
 ENV POST_DEPLOYMENT_SCRIPT /app/deploy-post-deployment.sh
+
+# Environment variables that cannot (yet?) be changed on runtime
 ENV NODE_VERSION=9.11.1
 ENV GULP_VERSION=3.9.1
 ENV JSPM_VERSION=0.16.53
 ENV NVM_DIR=/usr/local/nvm
-
 ENV PATH ${PATH}:${APP_ROOT}/bin:${APP_ROOT}/scripts:${APP_ROOT}/app
 
 # Install extra packages, PHP extensions, ...
