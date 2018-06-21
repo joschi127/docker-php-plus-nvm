@@ -9,6 +9,9 @@ fi
 
 buildnumber=$(date -u +"%Y%m%d_%H%M")
 
+docker build --no-cache -t "$1"/php-plus-nvm:5.6.36-apache_"$buildnumber" ./5.6.36-apache
+docker tag "$1"/php-plus-nvm:5.6.36-apache_"$buildnumber" "$1"/php-plus-nvm:5.6.36-apache_latest
+
 docker build --no-cache -t "$1"/php-plus-nvm:7.2.1-apache_"$buildnumber" ./7.2.1-apache
 docker tag "$1"/php-plus-nvm:7.2.1-apache_"$buildnumber" "$1"/php-plus-nvm:7.2.1-apache_latest
 
