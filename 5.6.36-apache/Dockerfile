@@ -56,7 +56,6 @@ RUN apt-get update \
     && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
     && rm -rf /var/lib/apt/lists/* \
     && pecl install imagick-beta \
-    && pecl install xdebug \
     && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
     && docker-php-ext-install gd \
         mysqli \
@@ -77,7 +76,7 @@ RUN apt-get update \
         simplexml \
         exif \
         sockets \
-    && docker-php-ext-enable imagick xdebug \
+    && docker-php-ext-enable imagick \
     && make-ssl-cert generate-default-snakeoil
 
 COPY motd /etc/motd
