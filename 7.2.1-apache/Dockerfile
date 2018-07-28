@@ -120,6 +120,7 @@ RUN mkdir -p $NVM_DIR \
 
 # Setup bashrc
 RUN echo >> /etc/bash.bashrc \
+    && echo ". /etc/profile.d/dockerenv.sh" >> /etc/bash.bashrc \
     && echo "cd \$APP_ROOT" >> /etc/bash.bashrc \
     && echo ". \$NVM_DIR/nvm.sh" >> /etc/bash.bashrc \
     && echo >> /etc/bash.bashrc
