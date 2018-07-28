@@ -46,6 +46,8 @@ Configuration options / environment variables:
 * APPLICATION_USER_ID (default: 1000)
 
   The id of the application user.
+  If set to 'auto', the user id will be detected based on the owner of
+  the APP_ROOT folder.
 
 
 * APPLICATION_GROUP (default: application)
@@ -56,6 +58,8 @@ Configuration options / environment variables:
 * APPLICATION_GROUP_ID (default: 1000)
 
   The group id of the application user.
+  If set to 'auto', the group id will be detected based on the owner of
+  the APP_ROOT folder.
 
 
 * POST_DEPLOYMENT_SCRIPT (default: /app/deploy-post-deployment.sh)
