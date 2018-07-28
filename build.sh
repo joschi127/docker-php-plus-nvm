@@ -1,23 +1,31 @@
 #!/usr/bin/env bash
 set -x -e
 
-if test "$1" = "" || test "$2" = "" || test "$3" = ""
+# parse arguments
+if [ "$1" = "" ] || ([ "$2" != "" ] && [ "$2" != "--no-cache" ])
 then
-    echo "Usage: $0 DOCKER_HUB_REPOSITORY DOCKER_HUB_USER DOCKER_HUB_PASSWORD"
+    echo "Usage: $0 DOCKER_USERNAME [ --no-cache ]"
     exit 1
 fi
+DOCKER_USERNAME="$1"
+NO_CACHE_PARAM="$2"
 
+# login
+DOCKER_ALREADY_LOGGED_IN_USERNAME="$(docker info | grep 'Username:' | sed 's/Username: //')"
+if [ "$DOCKER_ALREADY_LOGGED_IN_USERNAME" = "" ] || [ "$DOCKER_ALREADY_LOGGED_IN_USERNAME" != "$DOCKER_USERNAME" ]
+then
+    docker login -u "$DOCKER_USERNAME"
+fi
+
+# generate build number
 buildnumber=$(date -u +"%Y%m%d_%H%M")
 
-docker build --no-cache -t "$1"/php-plus-nvm:5.6.36-apache_"$buildnumber" ./5.6.36-apache
-docker tag "$1"/php-plus-nvm:5.6.36-apache_"$buildnumber" "$1"/php-plus-nvm:5.6.36-apache_latest
+# build
+docker build $NO_CACHE_PARAM -t joschi127/php-plus-nvm:5.6.36-apache_"$buildnumber" ./5.6.36-apache
+docker tag joschi127/php-plus-nvm:5.6.36-apache_"$buildnumber" joschi127/php-plus-nvm:5.6.36-apache_latest
 
-docker build --no-cache -t "$1"/php-plus-nvm:7.2.1-apache_"$buildnumber" ./7.2.1-apache
-docker tag "$1"/php-plus-nvm:7.2.1-apache_"$buildnumber" "$1"/php-plus-nvm:7.2.1-apache_latest
+docker build $NO_CACHE_PARAM -t joschi127/php-plus-nvm:7.2.1-apache_"$buildnumber" ./7.2.1-apache
+docker tag joschi127/php-plus-nvm:7.2.1-apache_"$buildnumber" joschi127/php-plus-nvm:7.2.1-apache_latest
 
-docker login -u "$2" -p "$3"
-
-docker push "$1"/php-plus-nvm:7.2.1-apache_"$buildnumber"
-docker push "$1"/php-plus-nvm:7.2.1-apache_latest
-
-docker logout
+docker push joschi127/php-plus-nvm:7.2.1-apache_"$buildnumber"
+docker push joschi127/php-plus-nvm:7.2.1-apache_latest
