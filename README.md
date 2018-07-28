@@ -1,8 +1,14 @@
 docker php-plus-nvm
 ===================
 
-Docker php image build with extra features and integrated nvm based
-nodejs support.
+Docker php image with extra features and integrated nvm based nodejs
+support.
+
+* Docker Hub URL:
+  https://hub.docker.com/r/joschi127/php-plus-nvm/
+
+* GitHub URL for Dockerfiles and build script:
+  https://github.com/joschi127/docker-php-plus-nvm
 
 Based on default docker php image and inspired by
 https://github.com/webdevops/Dockerfile and
