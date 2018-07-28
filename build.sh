@@ -29,3 +29,9 @@ docker tag joschi127/php-plus-nvm:7.2.1-apache_"$buildnumber" joschi127/php-plus
 
 docker push joschi127/php-plus-nvm:7.2.1-apache_"$buildnumber"
 docker push joschi127/php-plus-nvm:7.2.1-apache_latest
+
+# remove old local images, if they are not used
+for old_image_id in $(docker images | grep joschi127/php-plus-nvm | grep -v _latest | grep -v _$buildnumber | awk '{print $3}')
+do
+    docker rmi $old_image_id || true
+done
