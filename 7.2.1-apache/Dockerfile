@@ -19,10 +19,6 @@ ENV JSPM_VERSION=0.16.53
 ENV NVM_DIR=/usr/local/nvm
 ENV PATH ${PATH}:${APP_ROOT}/bin:${APP_ROOT}/scripts:${APP_ROOT}/app
 
-# Create user
-RUN groupadd -g $APPLICATION_GROUP_ID $APPLICATION_GROUP \
-    && useradd -m -s /bin/bash -u $APPLICATION_USER_ID -g $APPLICATION_GROUP $APPLICATION_USER
-
 # Install extra packages, PHP extensions, ...
 RUN a2enmod rewrite expires include deflate proxy headers ssl
 RUN a2ensite default-ssl
@@ -119,11 +115,15 @@ RUN mkdir -p $NVM_DIR \
     && npm install jspm@$JSPM_VERSION -g
 
 # Setup bashrc
-RUN echo >> /etc/bash.bashrc \
-    && echo ". /etc/profile.d/dockerenv.sh" >> /etc/bash.bashrc \
-    && echo "cd \$APP_ROOT" >> /etc/bash.bashrc \
-    && echo ". \$NVM_DIR/nvm.sh" >> /etc/bash.bashrc \
-    && echo >> /etc/bash.bashrc
+RUN echo | tee -a /etc/skel/.bashrc >> /etc/bash.bashrc \
+    && echo ". /etc/profile.d/dockerenv.sh" | tee -a /etc/skel/.bashrc >> /etc/bash.bashrc \
+    && echo "cd \$APP_ROOT" | tee -a /etc/skel/.bashrc >> /etc/bash.bashrc \
+    && echo ". \$NVM_DIR/nvm.sh" | tee -a /etc/skel/.bashrc >> /etc/bash.bashrc \
+    && echo | tee -a /etc/skel/.bashrc >> /etc/bash.bashrc
+
+# Create user
+RUN groupadd -g $APPLICATION_GROUP_ID $APPLICATION_GROUP \
+    && useradd -m -s /bin/bash -u $APPLICATION_USER_ID -g $APPLICATION_GROUP $APPLICATION_USER
 
 WORKDIR ${APP_ROOT}
 
