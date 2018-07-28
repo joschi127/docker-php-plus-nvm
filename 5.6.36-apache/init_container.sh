@@ -3,6 +3,13 @@
 # welcome message
 cat /etc/motd
 
+# Update application user id and group id
+groupadd -g $APPLICATION_GROUP_ID $APPLICATION_USER || true
+useradd -m -u $APPLICATION_USER_ID -g $APPLICATION_USER $APPLICATION_USER || true
+usermod -u $APPLICATION_USER_ID $APPLICATION_USER
+groupmod -g $APPLICATION_GROUP_ID $APPLICATION_GROUP
+chown -R $APPLICATION_USER_ID:$APPLICATION_GROUP_ID /home/$APPLICATION_USER
+
 # Get environment variables to show up in SSH session
 eval $(printenv | awk -F= '{print "export " $1"="$2 }' >> /etc/profile)
 

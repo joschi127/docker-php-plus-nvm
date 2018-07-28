@@ -32,6 +32,26 @@ Configuration options / environment variables:
   The root of the application.
 
 
+* APPLICATION_USER (default: application)
+
+  The username of the application user.
+
+
+* APPLICATION_USER_ID (default: 1000)
+
+  The id of the application user.
+
+
+* APPLICATION_GROUP (default: application)
+
+  The group name of the application user.
+
+
+* APPLICATION_GROUP_ID (default: 1000)
+
+  The group id of the application user.
+
+
 * POST_DEPLOYMENT_SCRIPT (default: /app/deploy-post-deployment.sh)
 
   Script that will be executed after deployment / during container

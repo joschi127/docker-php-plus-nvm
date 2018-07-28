@@ -6,6 +6,10 @@ ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
 ENV APACHE_DOCUMENT_ROOT /app/web
 ENV APP_ROOT /app
+ENV APPLICATION_USER "application"
+ENV APPLICATION_USER_ID "1000"
+ENV APPLICATION_GROUP "application"
+ENV APPLICATION_GROUP_ID "1000"
 ENV POST_DEPLOYMENT_SCRIPT /app/deploy-post-deployment.sh
 
 # Environment variables that cannot (yet?) be changed on runtime
@@ -14,6 +18,10 @@ ENV GULP_VERSION=3.9.1
 ENV JSPM_VERSION=0.16.53
 ENV NVM_DIR=/usr/local/nvm
 ENV PATH ${PATH}:${APP_ROOT}/bin:${APP_ROOT}/scripts:${APP_ROOT}/app
+
+# Create user
+RUN groupadd -g $APPLICATION_GROUP_ID $APPLICATION_USER \
+    && useradd -m -u $APPLICATION_USER_ID -g $APPLICATION_USER $APPLICATION_USER
 
 # Install extra packages, PHP extensions, ...
 RUN a2enmod rewrite expires include deflate proxy headers ssl
