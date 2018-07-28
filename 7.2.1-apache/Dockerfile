@@ -57,6 +57,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && pecl install imagick-beta \
     && pecl install mcrypt-1.0.1 \
+    && pecl install xdebug \
     && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
     && docker-php-ext-install gd \
         mysqli \
@@ -76,8 +77,7 @@ RUN apt-get update \
         simplexml \
         exif \
         sockets \
-    && docker-php-ext-enable imagick \
-    && docker-php-ext-enable mcrypt \
+    && docker-php-ext-enable imagick mcrypt xdebug \
     && make-ssl-cert generate-default-snakeoil
 
 COPY motd /etc/motd
