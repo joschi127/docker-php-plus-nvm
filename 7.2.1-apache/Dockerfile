@@ -38,6 +38,7 @@ RUN apt-get update \
         libssl-dev \
         openssh-server \
         ca-certificates \
+        python2.7 \
         git \
         vim \
         nano \
@@ -111,6 +112,7 @@ RUN mkdir -p $NVM_DIR \
     && nvm install $NODE_VERSION \
     && nvm alias default $NODE_VERSION \
     && nvm use default \
+    && npm config set python python2.7 \
     && npm install gulp@$GULP_VERSION -g \
     && npm install jspm@$JSPM_VERSION -g
 
