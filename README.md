@@ -10,6 +10,7 @@ https://github.com/Azure-App-Service/php images.
 
 
 Configuration options / environment variables:
+----------------------------------------------
 
 * APACHE_RUN_USER (default: www-data)
 
