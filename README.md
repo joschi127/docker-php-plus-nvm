@@ -58,6 +58,15 @@ Configuration options / environment variables:
   startup.
 
 
+Build:
+------
+
+* To build the images and push them to docker hub:
+
+        # build
+        ./build.sh DOCKER_USERNAME [ --no-cache ]
+
+
 Run for testing:
 ----------------
 
