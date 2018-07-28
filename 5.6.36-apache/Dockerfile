@@ -106,6 +106,9 @@ RUN { \
             echo 'date.timezone=Europe/Berlin'; \
     } > /usr/local/etc/php/conf.d/php.ini
 
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 # Install nodejs / npm via nvm
 RUN mkdir -p $NVM_DIR \
     && curl https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash \
