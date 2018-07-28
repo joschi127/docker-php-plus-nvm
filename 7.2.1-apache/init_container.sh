@@ -11,7 +11,7 @@ groupmod -g $APPLICATION_GROUP_ID $APPLICATION_GROUP
 chown -R $APPLICATION_USER_ID:$APPLICATION_GROUP_ID /home/$APPLICATION_USER
 
 # Get environment variables to show up in SSH session
-eval $(printenv | grep -v -e '^PWD\|^OLDPWD\|^TERM' | awk -F= '{print "export " $1"=\""$2"\"" }' >> /etc/profile)
+eval $(printenv | grep -v -e '^PWD\|^OLDPWD\|^HOME\|^USER\|^TERM' | awk -F= '{print "export " $1"=\""$2"\"" }' >> /etc/profile)
 
 # Start ssh
 service ssh start
