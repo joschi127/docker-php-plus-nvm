@@ -77,7 +77,7 @@ RUN apt-get update \
         simplexml \
         exif \
         sockets \
-    && docker-php-ext-enable imagick mcrypt xdebug \
+    && docker-php-ext-enable imagick mcrypt \
     && make-ssl-cert generate-default-snakeoil
 
 COPY motd /etc/motd

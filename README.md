@@ -68,6 +68,18 @@ Configuration options / environment variables:
   startup.
 
 
+Xdebug:
+-------
+
+The php xdebug extension is installed but not enabled by default. If
+enabled, it makes things much slower, especially when running
+`composer update` or `cache:clear` on a bigger project.
+
+To (temporarily) enable xdebug, add to your php.ini:
+
+        zend_extension                 = xdebug.so
+
+
 Build:
 ------
 
