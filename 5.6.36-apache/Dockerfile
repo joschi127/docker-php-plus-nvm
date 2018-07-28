@@ -20,8 +20,8 @@ ENV NVM_DIR=/usr/local/nvm
 ENV PATH ${PATH}:${APP_ROOT}/bin:${APP_ROOT}/scripts:${APP_ROOT}/app
 
 # Create user
-RUN groupadd -g $APPLICATION_GROUP_ID $APPLICATION_USER \
-    && useradd -m -u $APPLICATION_USER_ID -g $APPLICATION_USER $APPLICATION_USER
+RUN groupadd -g $APPLICATION_GROUP_ID $APPLICATION_GROUP \
+    && useradd -m -s /bin/bash -u $APPLICATION_USER_ID -g $APPLICATION_GROUP $APPLICATION_USER
 
 # Install extra packages, PHP extensions, ...
 RUN a2enmod rewrite expires include deflate proxy headers ssl
