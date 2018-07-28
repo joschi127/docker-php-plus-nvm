@@ -50,6 +50,7 @@ RUN apt-get update \
         mysql-client \
         postgresql-client \
         ssl-cert \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1 \
     && ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/libldap.so \
     && ln -s /usr/lib/x86_64-linux-gnu/liblber.so /usr/lib/liblber.so \
     && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
