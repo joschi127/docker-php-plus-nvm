@@ -44,6 +44,7 @@ RUN apt-get update \
         nano \
         curl \
         wget \
+        rsync \
         inetutils-ping \
         screen \
         bash-completion \
