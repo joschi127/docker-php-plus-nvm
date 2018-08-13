@@ -34,6 +34,7 @@ RUN apt-get update \
         libicu-dev \
         libgmp-dev \
         libmagickwand-dev \
+        libxml2-dev \
         build-essential \
         libssl-dev \
         openssh-server \
