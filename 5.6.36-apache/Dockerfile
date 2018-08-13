@@ -77,6 +77,7 @@ RUN apt-get update \
         simplexml \
         exif \
         sockets \
+        soap \
     && docker-php-ext-enable imagick \
     && make-ssl-cert generate-default-snakeoil
 
