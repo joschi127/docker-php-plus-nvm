@@ -27,6 +27,10 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         libpng-dev \
         libjpeg-dev \
+        libwebp-dev \
+        libjpeg62-turbo-dev \
+        libxpm-dev \
+        libfreetype6-dev \
         libpq-dev \
         libmcrypt-dev \
         libldap2-dev \
@@ -58,7 +62,15 @@ RUN apt-get update \
     && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
     && rm -rf /var/lib/apt/lists/* \
     && pecl install imagick-beta \
-    && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
+    && docker-php-ext-configure gd \
+        --with-gd \
+        --with-webp-dir \
+        --with-jpeg-dir \
+        --with-png-dir \
+        --with-zlib-dir \
+        --with-xpm-dir \
+        --with-freetype-dir \
+        --enable-gd-native-ttf \
     && docker-php-ext-install gd \
         mysqli \
         opcache \
