@@ -21,17 +21,23 @@ fi
 buildnumber=$(date -u +"%Y%m%d_%H%M")
 
 # build
-docker build $NO_CACHE_PARAM -t joschi127/php-plus-nvm:5.6.36-apache_"$buildnumber" ./5.6.36-apache
-docker tag joschi127/php-plus-nvm:5.6.36-apache_"$buildnumber" joschi127/php-plus-nvm:5.6.36-apache_latest
+docker build $NO_CACHE_PARAM -t joschi127/php-plus-nvm:5.6-apache_"$buildnumber" ./5.6-apache
+docker tag joschi127/php-plus-nvm:5.6-apache_"$buildnumber" joschi127/php-plus-nvm:5.6-apache_latest
 
-docker push joschi127/php-plus-nvm:5.6.36-apache_"$buildnumber"
-docker push joschi127/php-plus-nvm:5.6.36-apache_latest
+docker push joschi127/php-plus-nvm:5.6-apache_"$buildnumber"
+docker push joschi127/php-plus-nvm:5.6-apache_latest
 
-docker build $NO_CACHE_PARAM -t joschi127/php-plus-nvm:7.2.1-apache_"$buildnumber" ./7.2.1-apache
-docker tag joschi127/php-plus-nvm:7.2.1-apache_"$buildnumber" joschi127/php-plus-nvm:7.2.1-apache_latest
+docker build $NO_CACHE_PARAM -t joschi127/php-plus-nvm:7.2-apache_"$buildnumber" ./7.2-apache
+docker tag joschi127/php-plus-nvm:7.2-apache_"$buildnumber" joschi127/php-plus-nvm:7.2-apache_latest
 
-docker push joschi127/php-plus-nvm:7.2.1-apache_"$buildnumber"
-docker push joschi127/php-plus-nvm:7.2.1-apache_latest
+docker push joschi127/php-plus-nvm:7.2-apache_"$buildnumber"
+docker push joschi127/php-plus-nvm:7.2-apache_latest
+
+docker build $NO_CACHE_PARAM -t joschi127/php-plus-nvm:7.3-apache_"$buildnumber" ./7.3-apache
+docker tag joschi127/php-plus-nvm:7.3-apache_"$buildnumber" joschi127/php-plus-nvm:7.3-apache_latest
+
+docker push joschi127/php-plus-nvm:7.3-apache_"$buildnumber"
+docker push joschi127/php-plus-nvm:7.3-apache_latest
 
 # remove old local images, if they are not used
 for old_image_id in $(docker images | grep joschi127/php-plus-nvm | grep -v _latest | grep -v _$buildnumber | awk '{print $3}')

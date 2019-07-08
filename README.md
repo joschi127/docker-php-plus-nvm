@@ -95,7 +95,7 @@ Run for testing:
 * Run a container from the created image:
 
         # run container
-        docker run --name test --detach --env MYVAR=foo joschi127/php-plus-nvm:7.2.1-apache_latest
+        docker run --name test --detach --env MYVAR=foo joschi127/php-plus-nvm:7.2-apache_latest
 
         # show logs
         docker logs test [ -f ]

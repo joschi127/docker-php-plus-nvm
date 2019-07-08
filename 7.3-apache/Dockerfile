@@ -1,4 +1,4 @@
-FROM php:5.6.36-apache
+FROM php:7.3-apache
 MAINTAINER joschi127 <127.joschi@gmail.com>
 
 # Environment variables that can be changed on runtime
@@ -13,7 +13,7 @@ ENV APPLICATION_GROUP_ID "1000"
 ENV POST_DEPLOYMENT_SCRIPT /app/deploy-post-deployment.sh
 
 # Environment variables that cannot (yet?) be changed on runtime
-ENV NODE_VERSION=9.11.1
+ENV NODE_VERSION=10.14.1
 ENV GULP_VERSION=3.9.1
 ENV JSPM_VERSION=0.16.53
 ENV NVM_DIR=/usr/local/nvm
@@ -62,6 +62,8 @@ RUN apt-get update \
     && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
     && rm -rf /var/lib/apt/lists/* \
     && pecl install imagick-beta \
+    && pecl install mcrypt-1.0.1 \
+    && pecl install xdebug \
     && docker-php-ext-configure gd \
         --with-gd \
         --with-webp-dir \
@@ -84,14 +86,13 @@ RUN apt-get update \
         zip \
         bcmath \
         mbstring \
-        mcrypt \
         pcntl \
         xml \
         simplexml \
         exif \
         sockets \
         soap \
-    && docker-php-ext-enable imagick \
+    && docker-php-ext-enable imagick mcrypt \
     && make-ssl-cert generate-default-snakeoil
 
 COPY motd /etc/motd
