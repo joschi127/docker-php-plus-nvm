@@ -39,6 +39,7 @@ RUN apt-get update \
         libgmp-dev \
         libmagickwand-dev \
         libxml2-dev \
+        libzip-dev \
         build-essential \
         libssl-dev \
         openssh-server \
