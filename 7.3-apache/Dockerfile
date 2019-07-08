@@ -62,7 +62,7 @@ RUN apt-get update \
     && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
     && rm -rf /var/lib/apt/lists/* \
     && pecl install imagick-beta \
-    && pecl install mcrypt-1.0.1 \
+    && pecl install mcrypt-1.0.2 \
     && pecl install xdebug \
     && docker-php-ext-configure gd \
         --with-gd \
