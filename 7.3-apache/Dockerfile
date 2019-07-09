@@ -51,6 +51,7 @@ RUN apt-get update \
         curl \
         wget \
         rsync \
+        unzip \
         inetutils-ping \
         screen \
         bash-completion \
