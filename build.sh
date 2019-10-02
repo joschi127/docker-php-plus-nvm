@@ -21,18 +21,28 @@ fi
 buildnumber=$(date -u +"%Y%m%d_%H%M")
 
 # build
+# - php 5.6
 docker build $NO_CACHE_PARAM -t joschi127/php-plus-nvm:5.6-apache_"$buildnumber" ./5.6-apache
 docker tag joschi127/php-plus-nvm:5.6-apache_"$buildnumber" joschi127/php-plus-nvm:5.6-apache_latest
 
 docker push joschi127/php-plus-nvm:5.6-apache_"$buildnumber"
 docker push joschi127/php-plus-nvm:5.6-apache_latest
 
+# - php 7.1
+docker build $NO_CACHE_PARAM -t joschi127/php-plus-nvm:7.1-apache_"$buildnumber" ./7.1-apache
+docker tag joschi127/php-plus-nvm:7.1-apache_"$buildnumber" joschi127/php-plus-nvm:7.1-apache_latest
+
+docker push joschi127/php-plus-nvm:7.1-apache_"$buildnumber"
+docker push joschi127/php-plus-nvm:7.1-apache_latest
+
+# - php 7.2
 docker build $NO_CACHE_PARAM -t joschi127/php-plus-nvm:7.2-apache_"$buildnumber" ./7.2-apache
 docker tag joschi127/php-plus-nvm:7.2-apache_"$buildnumber" joschi127/php-plus-nvm:7.2-apache_latest
 
 docker push joschi127/php-plus-nvm:7.2-apache_"$buildnumber"
 docker push joschi127/php-plus-nvm:7.2-apache_latest
 
+# - php 7.3
 docker build $NO_CACHE_PARAM -t joschi127/php-plus-nvm:7.3-apache_"$buildnumber" ./7.3-apache
 docker tag joschi127/php-plus-nvm:7.3-apache_"$buildnumber" joschi127/php-plus-nvm:7.3-apache_latest
 
