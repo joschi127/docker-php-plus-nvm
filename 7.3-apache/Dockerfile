@@ -53,6 +53,7 @@ RUN apt-get update \
         rsync \
         unzip \
         inetutils-ping \
+        tcptraceroute \
         screen \
         bash-completion \
         mysql-client \
