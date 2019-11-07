@@ -58,7 +58,6 @@ RUN apt-get update \
         mariadb-client \
         postgresql-client \
         ssl-cert \
-        sysvsem \
     && update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1 \
     && ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/libldap.so \
     && ln -s /usr/lib/x86_64-linux-gnu/liblber.so /usr/lib/liblber.so \
@@ -95,6 +94,7 @@ RUN apt-get update \
         exif \
         sockets \
         soap \
+        sysvsem \
     && docker-php-ext-enable imagick mcrypt \
     && make-ssl-cert generate-default-snakeoil
 
