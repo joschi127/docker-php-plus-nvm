@@ -44,6 +44,7 @@ RUN apt-get update \
         openssh-server \
         ca-certificates \
         python2.7 \
+        imagemagick \
         git \
         vim \
         nano \
