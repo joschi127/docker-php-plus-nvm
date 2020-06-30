@@ -29,6 +29,11 @@ chown -R $APPLICATION_USER_ID:$APPLICATION_GROUP_ID /home/$APPLICATION_USER
 # Get environment variables to show up in SSH session
 eval $(printenv | grep -v -e '^PWD\|^OLDPWD\|^HOME\|^USER\|^TERM' | awk -F= '{print "export " $1"=\""$2"\"" }' > /etc/profile.d/dockerenv.sh)
 
+# Set localtime according to TZ environment variable
+if [ "$TZ" != "" ]; then
+    ln -sf /usr/share/zoneinfo/$TZ /etc/localtime
+fi
+
 # Start ssh
 service ssh start
 
