@@ -45,6 +45,7 @@ RUN apt-get update \
         openssh-server \
         ca-certificates \
         python2.7 \
+        webp \
         imagemagick \
         git \
         vim \
