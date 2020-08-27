@@ -43,6 +43,7 @@ RUN apt-get update \
         build-essential \
         libssl-dev \
         openssh-server \
+        openssl \
         ca-certificates \
         python2.7 \
         webp \
