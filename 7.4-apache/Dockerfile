@@ -40,10 +40,11 @@ RUN apt-get update \
         libmagickwand-dev \
         libxml2-dev \
         libzip-dev \
+        libonig-dev \
         build-essential \
         libssl-dev \
         openssh-server \
-        ca-certificates=20200601~deb9u1 \
+        ca-certificates \
         python2.7 \
         webp \
         imagemagick \
@@ -58,7 +59,7 @@ RUN apt-get update \
         tcptraceroute \
         screen \
         bash-completion \
-        mysql-client \
+        mariadb-client \
         postgresql-client \
         ssl-cert \
     && update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1 \
@@ -70,14 +71,11 @@ RUN apt-get update \
     && pecl install mcrypt-1.0.3 \
     && pecl install xdebug \
     && docker-php-ext-configure gd \
-        --with-gd \
-        --with-webp-dir \
-        --with-jpeg-dir \
-        --with-png-dir \
-        --with-zlib-dir \
-        --with-xpm-dir \
-        --with-freetype-dir \
-        --enable-gd-native-ttf \
+        --enable-gd \
+        --with-webp \
+        --with-jpeg \
+        --with-xpm \
+        --with-freetype \
     && docker-php-ext-install gd \
         mysqli \
         opcache \
