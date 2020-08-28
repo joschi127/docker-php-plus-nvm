@@ -43,8 +43,7 @@ RUN apt-get update \
         build-essential \
         libssl-dev \
         openssh-server \
-        openssl \
-        ca-certificates \
+        ca-certificates=20200601~deb9u1 \
         python2.7 \
         webp \
         imagemagick \
